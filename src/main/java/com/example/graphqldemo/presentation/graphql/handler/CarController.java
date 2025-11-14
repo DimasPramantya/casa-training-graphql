@@ -5,6 +5,7 @@ import com.example.graphqldemo.domain.Car;
 import com.example.graphqldemo.domain.CarCatalogue;
 import com.example.graphqldemo.domain.CarType;
 import com.example.graphqldemo.usecase.CarUseCase;
+import com.example.graphqldemo.usecase.CatalogueUseCase;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
@@ -17,9 +18,11 @@ import java.util.List;
 @Controller
 public class CarController {
     private final CarUseCase carUseCase;
+    private final CatalogueUseCase catalogueUseCase;
 
-    public CarController(CarUseCase carUseCase) {
+    public CarController(CarUseCase carUseCase, CatalogueUseCase catalogueUseCase) {
         this.carUseCase = carUseCase;
+        this.catalogueUseCase = catalogueUseCase;
     }
 
     @QueryMapping
@@ -34,12 +37,12 @@ public class CarController {
 
     @QueryMapping
     public List<CarCatalogue> getCatalogue() {
-        return carUseCase.getCarCatalogue();
+        return catalogueUseCase.getCarCatalogue();
     }
 
     @QueryMapping
     public CarCatalogue getCatalogueById(@Argument String id) {
-        return carUseCase.getCarCatalogueById(id);
+        return catalogueUseCase.getCarCatalogueById(id);
     }
 
     @SchemaMapping(typeName = "Car", field = "carType")
@@ -55,6 +58,4 @@ public class CarController {
     public Car getCatalogueCar(CarCatalogue catalogue) {
         return catalogue.getCar();
     }
-
-
 }

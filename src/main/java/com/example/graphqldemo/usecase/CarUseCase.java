@@ -7,7 +7,6 @@ import com.example.graphqldemo.repository.CarRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class CarUseCase {
@@ -25,13 +24,5 @@ public class CarUseCase {
 
     public Car getCarById(String id){
         return carRepository.findById(id).orElse(null);
-    }
-
-    public List<CarCatalogue> getCarCatalogue(){
-        return carCatalogueRepository.findAll();
-    }
-
-    public CarCatalogue getCarCatalogueById(String id){
-        return carCatalogueRepository.findById(id).orElse(null);
     }
 }
