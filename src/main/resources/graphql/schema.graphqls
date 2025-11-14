@@ -1,0 +1,55 @@
+type Book {
+    id: ID
+    title: String
+    publishedYear: Int
+    summary: String
+    author: Author
+}
+
+type Author {
+    id: ID
+    firstName: String
+    lastName: String
+    birthYear: Int
+}
+
+type CarType {
+    id: ID
+    typeName: String
+}
+
+type Brand {
+    id: ID
+    name: String
+    country: String
+    establishedAt: Int
+}
+
+type Car {
+    id: ID
+    name: String
+    carType: CarType
+    brand: Brand
+    color: String
+    Transmission: String
+    isElectric: Boolean
+}
+
+type Catalogue {
+    id: ID
+    ready: Boolean
+    price: Int
+    stock: Int
+    car: Car
+}
+
+type Query{
+    books: [Book],
+    bookById(id: ID!): Book
+    authors: [Author]
+    authorById(id: ID!): Author
+    getCars: [Car]
+    getCatalogue: [Catalogue]
+    getCatalogueById(id: ID!): Catalogue
+    getCarsById(id: ID!): Car
+}
